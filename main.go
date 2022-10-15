@@ -12,8 +12,8 @@ import (
 
 const (
 	templatePath = "filament.tmpl"
-	dataPath     = "filament.json"
-	historyPath  = "history"
+	dataPath     = "data/filament.json"
+	historyPath  = "data/history"
 )
 
 var page = template.Must(template.ParseFiles(templatePath))
