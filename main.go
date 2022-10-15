@@ -7,11 +7,13 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 )
 
 const (
 	templatePath = "filament.tmpl"
 	dataPath     = "filament.json"
+	historyPath  = "history"
 )
 
 var page = template.Must(template.ParseFiles(templatePath))
@@ -49,6 +51,14 @@ func pageHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		history, err := os.OpenFile(historyPath, os.O_WRONLY|os.O_APPEND, os.ModeAppend)
+		if err != nil {
+			fmt.Printf("ERR: open history %s\n", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+
+		now := time.Now()
 		for key, values := range r.PostForm {
 			if len(values) < 1 || values[0] == "" {
 				continue
@@ -69,6 +79,14 @@ func pageHandler(w http.ResponseWriter, r *http.Request) {
 			material := data.Materials[key]
 			material.Amount -= consumed
 			data.Materials[key] = material
+
+			out := fmt.Sprintf("%s %s %f\n", now.Format(time.RFC3339), key, consumed)
+			_, err = history.WriteString(out)
+			if err != nil {
+				fmt.Printf("ERR: write history: %s: %s", out, err)
+				w.WriteHeader(http.StatusInternalServerError)
+				return
+			}
 		}
 
 		if err = dataFile.Truncate(0); err != nil {
