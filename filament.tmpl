@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<meta name='viewport' charset='utf-8' content='width=device-width, initial-scale=1.0' />
+
+		<link rel='stylesheet' type='text/css' href='/styles-min-2-1-0.css' />
+		<link rel='stylesheet' type='text/css' href='/styles-responsive-grid-min.css' />
+
+		<link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
+		<link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
+		<link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
+		<link rel='manifest' href='/site.webmanifest' />
+
+		<title>3D Printer</title>
+	</head>
+
+	<body>
+		<div class="pure-g">
+			<div class="pure-u-1">
+				<h1><center>Filament</center></h1>
+			</div>
+
+      <form class="pure-form" method="POST" id="form"><fieldset>
+        <div class="pure-u-1">
+          <center>
+            <table class="pure-table pure-table-bordered">
+              <thead>
+                <tr>
+                  <th><center>Material</center></th>
+                  <th><center>Amount</center></th>
+                  <th><center>Modify</center></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {{range $key, $material := .Materials}}
+                  <tr>
+                    <td align="left">{{$material.Name}}</td>
+                    <td align="right">{{$material.Amount}}g</td>
+                    <td><input type="text" name="{{$key}}" id="{{$key}}" placeholder="Amount" form="form"/></td>
+                  </tr>
+                {{end}}
+
+                {{if .Materials}}
+                  <tr>
+                    <td style="border-right-style: hidden;"/>
+                    <td style="border-right-style: hidden;"/>
+                    <td align="right">
+                      <button type="submit" class="pure-button pure-button-primary">Update</button>
+                    </td>
+                  </tr>
+                {{end}}
+              </tbody>
+            </table>
+          </center>
+        </div>
+      </fieldset></form>
+		</div>
+	</body>
+
+</html>
+

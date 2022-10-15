@@ -1,0 +1,28 @@
+{
+  "materials": {
+    "pacf_black": {
+      "name": "PA-CF Black",
+      "amount": 250
+    },
+    "pla_black_matte": {
+      "name": "PLA Black Matte",
+      "amount": 1000
+    },
+    "pla_pink_matte": {
+      "name": "PLA Pink Matte",
+      "amount": 1000
+    },
+    "pla_red_matte": {
+      "name": "PLA Red Matte",
+      "amount": 1000
+    },
+    "pla_white_matte": {
+      "name": "PLA White Matte",
+      "amount": 1000
+    },
+    "support_w": {
+      "name": "Support W",
+      "amount": 250
+    }
+  }
+}
