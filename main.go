@@ -23,8 +23,14 @@ type Data struct {
 }
 
 type Material struct {
-	Name   string  `json:"name"`
-	Amount float64 `json:"amount"` // in grams
+	Name   string `json:"name"`
+	Amount float  `json:"amount"` // in grams
+}
+
+type float float64
+
+func (f float) String() string {
+	return fmt.Sprintf("%.2f", f)
 }
 
 func pageHandler(w http.ResponseWriter, r *http.Request) {
@@ -82,7 +88,7 @@ func pageHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			material := data.Materials[key]
-			material.Amount -= consumed
+			material.Amount -= float(consumed)
 			data.Materials[key] = material
 
 			out := fmt.Sprintf("%s %s %f\n", now.Format(time.RFC3339), key, consumed)
