@@ -28,6 +28,11 @@ type Material struct {
 }
 
 func pageHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost && r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
 	dataFile, err := os.OpenFile(dataPath, os.O_RDWR, os.ModePerm)
 	if err != nil {
 		fmt.Printf("ERR: parse data flat file: %s\n", err)
@@ -51,7 +56,7 @@ func pageHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		history, err := os.OpenFile(historyPath, os.O_WRONLY|os.O_APPEND, os.ModeAppend)
+		history, err := os.OpenFile(historyPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
 			fmt.Printf("ERR: open history %s\n", err)
 			w.WriteHeader(http.StatusInternalServerError)
