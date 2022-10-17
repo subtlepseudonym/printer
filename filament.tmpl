@@ -36,7 +36,7 @@
 								{{range $key, $material := .Materials}}
 									<tr>
 										<td align="left">{{$material.Name}}</td>
-										<td align="right">{{$material.Amount}}g</td>
+										<td align="right">{{printf "%.2f" $material.Amount}}g</td>
 										<td><input type="text" name="{{$key}}" id="{{$key}}" placeholder="Amount" form="form"/></td>
 									</tr>
 								{{end}}

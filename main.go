@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"math/big"
 	"net/http"
 	"os"
-	"strconv"
 	"time"
 )
 
@@ -24,13 +24,7 @@ type Data struct {
 
 type Material struct {
 	Name   string `json:"name"`
-	Amount float  `json:"amount"` // in grams
-}
-
-type float float64
-
-func (f float) String() string {
-	return fmt.Sprintf("%.2f", f)
+	Amount *big.Float `json:"amount"` // in grams
 }
 
 func pageHandler(w http.ResponseWriter, r *http.Request) {
@@ -81,14 +75,14 @@ func pageHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			consumed, err := strconv.ParseFloat(values[0], 64)
+			consumed, _, err := big.ParseFloat(values[0], 10, 1024, big.ToNearestAway)
 			if err != nil {
 				fmt.Printf("ERR: parse consumed amount: %q: %s", values[0], err)
 				w.WriteHeader(http.StatusBadRequest)
 				return
 			}
 			material := data.Materials[key]
-			material.Amount -= float(consumed)
+			material.Amount.Sub(material.Amount, consumed)
 			data.Materials[key] = material
 
 			out := fmt.Sprintf("%s %s %f\n", now.Format(time.RFC3339), key, consumed)
