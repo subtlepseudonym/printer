@@ -20,42 +20,42 @@
 				<h1><center>Filament</center></h1>
 			</div>
 
-      <form class="pure-form" method="POST" id="form"><fieldset>
-        <div class="pure-u-1">
-          <center>
-            <table class="pure-table pure-table-bordered">
-              <thead>
-                <tr>
-                  <th><center>Material</center></th>
-                  <th><center>Amount</center></th>
-                  <th><center>Modify</center></th>
-                </tr>
-              </thead>
+			<div class="pure-u-1">
+				<form class="pure-form" method="POST" id="form"><fieldset>
+					<center>
+						<table class="pure-table pure-table-bordered">
+							<thead>
+								<tr>
+									<th><center>Material</center></th>
+									<th><center>Amount</center></th>
+									<th><center>Modify</center></th>
+								</tr>
+							</thead>
 
-              <tbody>
-                {{range $key, $material := .Materials}}
-                  <tr>
-                    <td align="left">{{$material.Name}}</td>
-                    <td align="right">{{$material.Amount}}g</td>
-                    <td><input type="text" name="{{$key}}" id="{{$key}}" placeholder="Amount" form="form"/></td>
-                  </tr>
-                {{end}}
+							<tbody>
+								{{range $key, $material := .Materials}}
+									<tr>
+										<td align="left">{{$material.Name}}</td>
+										<td align="right">{{$material.Amount}}g</td>
+										<td><input type="text" name="{{$key}}" id="{{$key}}" placeholder="Amount" form="form"/></td>
+									</tr>
+								{{end}}
 
-                {{if .Materials}}
-                  <tr>
-                    <td style="border-right-style: hidden;"/>
-                    <td style="border-right-style: hidden;"/>
-                    <td align="right">
-                      <button type="submit" class="pure-button pure-button-primary">Update</button>
-                    </td>
-                  </tr>
-                {{end}}
-              </tbody>
-            </table>
-          </center>
-        </div>
-      </fieldset></form>
-		</div>
+								{{if .Materials}}
+									<tr>
+										<td style="border-right-style: hidden;"/>
+										<td style="border-right-style: hidden;"/>
+										<td align="right">
+											<button type="submit" class="pure-button pure-button-primary">Update</button>
+										</td>
+									</tr>
+								{{end}}
+							</tbody>
+						</table>
+					</center>
+				</div>
+			</div>
+		</fieldset></form>
 	</body>
 
 </html>
