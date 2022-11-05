@@ -124,10 +124,18 @@ func pageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+}
+
 func main() {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", pageHandler)
+	mux.HandleFunc("/health", healthHandler)
+
 	srv := &http.Server{
 		Addr:    ":9000",
-		Handler: http.HandlerFunc(pageHandler),
+		Handler: mux.
 	}
 	srv.ListenAndServe()
 }
