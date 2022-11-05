@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -137,5 +138,7 @@ func main() {
 		Addr:    ":9000",
 		Handler: mux.
 	}
+
+	log.Printf("listening on %s", srv.Addr)
 	srv.ListenAndServe()
 }
