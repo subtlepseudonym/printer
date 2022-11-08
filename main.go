@@ -1,10 +1,10 @@
 package main
 
 import (
-	"log"
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"log"
 	"math/big"
 	"net/http"
 	"os"
@@ -136,7 +136,7 @@ func main() {
 
 	srv := &http.Server{
 		Addr:    ":9000",
-		Handler: mux.
+		Handler: mux,
 	}
 
 	log.Printf("listening on %s", srv.Addr)
