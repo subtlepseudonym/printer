@@ -1,6 +1,6 @@
 BINARY=printer
 BUILD=$$(vtag --no-meta)
-TAG="${BINARY}:${BUILD}"
+TAG="subtlepseudonym/${BINARY}:${BUILD}"
 
 default: build
 
