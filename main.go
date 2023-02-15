@@ -24,8 +24,11 @@ type Data struct {
 }
 
 type Material struct {
-	Name   string     `json:"name"`
-	Amount *big.Float `json:"amount"` // in grams
+	Material string     `json:"material"`
+	Brand    string     `json:"brand"`
+	Finish   string     `json:"finish"`
+	Color    string     `json:"color"`
+	Amount   *big.Float `json:"amount"` // in grams
 }
 
 func pageHandler(w http.ResponseWriter, r *http.Request) {

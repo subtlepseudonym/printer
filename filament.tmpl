@@ -27,6 +27,9 @@
 							<thead>
 								<tr>
 									<th><center>Material</center></th>
+									<th><center>Brand</center></th>
+									<th><center>Finish</center></th>
+									<th><center>Color</center></th>
 									<th><center>Amount</center></th>
 									<th><center>Modify</center></th>
 								</tr>
@@ -35,7 +38,10 @@
 							<tbody>
 								{{range $key, $material := .Materials}}
 									<tr>
-										<td align="left">{{$material.Name}}</td>
+										<td align="left">{{$material.Material}}</td>
+										<td align="left">{{$material.Brand}}</td>
+										<td align="left">{{$material.Finish}}</td>
+										<td align="left">{{$material.Color}}</td>
 										<td align="right">{{printf "%.2f" $material.Amount}}g</td>
 										<td><input type="text" name="{{$key}}" id="{{$key}}" placeholder="Amount" form="form"/></td>
 									</tr>
